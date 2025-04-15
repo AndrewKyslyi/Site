@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h2>Logged Out</h2>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success fa-5x"></i>
+                    </div>
+                    <h3 class="mb-3">You have been successfully logged out</h3>
+                    <p class="lead">Thank you for visiting Scorpy Tale. We hope to see you again soon!</p>
+                    <div class="mt-4">
+                        <a href="{% url 'login' %}" class="btn btn-primary">Log In Again</a>
+                        <a href="{% url 'home' %}" class="btn btn-outline-secondary ms-2">Return to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Кошик{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="text-center mb-3">Ваш Кошик</h1>
+            <p class="text-center text-muted">Перегляньте товари перед оформленням замовлення</p>
+        </div>
+    </div>
+
+    {% if cart_items %}
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Cart Items -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Товари в кошику</h5>
+                </div>
+                <div class="card-body">
+                    {% for item in cart_items %}
+                    <div class="cart-item py-3 {% if not forloop.last %}border-bottom{% endif %}" data-flower-id="{{ item.flower.id }}">
+                        <div class="row align-items-center">
+                            <div class="col-md-2 mb-2 mb-md-0">
+                                {% if item.flower.image %}
+                                <img src="{{ item.flower.image.url }}" class="img-fluid rounded" alt="{{ item.flower.name }}">
+                                {% else %}
+                                <img src="{% static 'images/default_flower.jpg' %}" class="img-fluid rounded" alt="Товар за замовчуванням">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4 mb-2 mb-md-0">
+                                <h5 class="mb-1">{{ item.flower.name }}</h5>
+                                <p class="text-muted mb-0">Категорія: {{ item.flower.category.name }}</p>
+                            </div>
+                            <div class="col-md-2 mb-2 mb-md-0 text-center">
+                                <div class="input-group">
+                                    <button class="btn btn-outline-secondary quantity-minus" type="button" data-action="decrement">-</button>
+                                    <input type="text" class="form-control text-center quantity-input" value="{{ item.quantity }}" min="1" readonly>
+                                    <button class="btn btn-outline-secondary quantity-plus" type="button" data-action="increment">+</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2 mb-2 mb-md-0 text-center">
+                                <span class="text-primary fw-bold item-price">₴{{ item.price }}</span>
+                            </div>
+                            <div class="col-md-2 mb-2 mb-md-0 text-center">
+                                <span class="text-primary fw-bold item-subtotal">₴{{ item.subtotal }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <!-- Order Summary -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Підсумок замовлення</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Підсумок</span>
+                        <span class="fw-bold" id="cart-subtotal">₴{{ total }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Доставка</span>
+                        <span class="fw-bold">Безкоштовно</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="fw-bold">Загалом</span>
+                        <span class="fw-bold text-primary" id="cart-total">₴{{ total }}</span>
+                    </div>
+                    <a href="{% url 'checkout' %}" class="btn btn-primary w-100">Оформити замовлення</a>
+                </div>
+            </div>
+            
+            <!-- Continue Shopping -->
+            <div class="d-grid">
+                <a href="{% url 'flower-list' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Продовжити покупки
+                </a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-info shadow-sm">
+                <div class="text-center py-5">
+                    <i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i>
+                    <h4>Ваш кошик порожній</h4>
+                    <p class="mb-4">Схоже, ви ще не додали жодного товару до кошика.</p>
+                    <a href="{% url 'flower-list' %}" class="btn btn-primary">
+                        <i class="fas fa-store me-2"></i>Переглянути товари
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% if cart_items %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle quantity changes
+    const csrfToken = "{{ csrf_token }}";
+    
+    document.querySelectorAll('.quantity-minus, .quantity-plus').forEach(button => {
+        button.addEventListener('click', function() {
+            const item = this.closest('.cart-item');
+            const flowerId = item.dataset.flowerId;
+            const action = this.dataset.action;
+            const quantityInput = item.querySelector('.quantity-input');
+            
+            // Make AJAX request to update cart
+            fetch(`/flower/${flowerId}/update-cart/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken
+                },
+                body: `action=${action}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update quantity
+                    if (action === 'remove' || data.quantity === 0) {
+                        // Reload page if item was removed
+                        window.location.reload();
+                    } else {
+                        // Update quantity input
+                        quantityInput.value = data.quantity;
+                        
+                        // Update subtotal
+                        const subtotalElem = item.querySelector('.item-subtotal');
+                        subtotalElem.textContent = `₴${data.subtotal.toFixed(2)}`;
+                        
+                        // Update cart total
+                        const cartSubtotal = document.getElementById('cart-subtotal');
+                        const cartTotal = document.getElementById('cart-total');
+                        cartSubtotal.textContent = `₴${data.total.toFixed(2)}`;
+                        cartTotal.textContent = `₴${data.total.toFixed(2)}`;
+                    }
+                }
+            });
+        });
+    });
+});
+</script>
+{% endif %}
+{% endblock %} 

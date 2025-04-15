@@ -1,0 +1,427 @@
+# This file contains the Ukrainian translations for the Scorpy Tale website.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Scorpy Tale\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-01 12:00+0000\n"
+"PO-Revision-Date: 2023-06-01 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+# Navigation
+msgid "Home"
+msgstr "Головна"
+
+msgid "Shop"
+msgstr "Магазин"
+
+msgid "About"
+msgstr "Про нас"
+
+msgid "Contact"
+msgstr "Контакти"
+
+msgid "Comments"
+msgstr "Коментарі"
+
+msgid "Cart"
+msgstr "Кошик"
+
+msgid "Profile"
+msgstr "Профіль"
+
+msgid "My Profile"
+msgstr "Мій профіль"
+
+msgid "Logout"
+msgstr "Вийти"
+
+msgid "Login"
+msgstr "Увійти"
+
+msgid "Register"
+msgstr "Реєстрація"
+
+msgid "Toggle Dark/Light Mode"
+msgstr "Переключити темну/світлу тему"
+
+# Welcome page
+msgid "Welcome to Scorpy Tale"
+msgstr "Ласкаво просимо до Scorpy Tale"
+
+msgid "Your premier destination for beautiful flowers and bouquets."
+msgstr "Ваше ідеальне місце для красивих квітів та букетів"
+
+msgid "Explore our collection of fresh flowers for every occasion. From weddings to anniversaries, birthdays to condolences, we have the perfect arrangement for you."
+msgstr "Дослідіть нашу колекцію свіжих квітів для кожної події. Від весіль до річниць, днів народження до співчуттів, у нас є ідеальна композиція для вас."
+
+msgid "Shop Now"
+msgstr "Купити зараз"
+
+msgid "Featured Flowers"
+msgstr "Популярні квіти"
+
+msgid "Default Flower"
+msgstr "Стандартна квітка"
+
+msgid "Browse by Category"
+msgstr "Переглянути за категорією"
+
+msgid "Beautiful flowers in this category"
+msgstr "Красиві квіти в цій категорії"
+
+msgid "Browse"
+msgstr "Переглянути"
+
+msgid "No flowers available at the moment. Please check back later."
+msgstr "На даний момент квіти недоступні. Будь ласка, перевірте пізніше."
+
+msgid "No categories available at the moment. Please check back later."
+msgstr "На даний момент категорії недоступні. Будь ласка, перевірте пізніше."
+
+msgid "Why Choose Scorpy Tale?"
+msgstr "Чому обрати Scorpy Tale?"
+
+msgid "Fresh Flowers"
+msgstr "Свіжі квіти"
+
+msgid "We source our flowers daily to ensure freshness and longevity."
+msgstr "Ми щодня поставляємо наші квіти, щоб забезпечити свіжість і довговічність."
+
+msgid "Fast Delivery"
+msgstr "Швидка доставка"
+
+msgid "Same-day delivery available for orders placed before noon."
+msgstr "Доставка в той же день доступна для замовлень, зроблених до полудня."
+
+msgid "Expert Arrangements"
+msgstr "Професійні композиції"
+
+msgid "Our skilled florists create stunning arrangements for every occasion."
+msgstr "Наші досвідчені флористи створюють вражаючі композиції для будь-яких подій."
+
+msgid "Flower Shop"
+msgstr "Квітковий магазин"
+
+# Product details
+msgid "Details"
+msgstr "Деталі"
+
+msgid "Category"
+msgstr "Категорія"
+
+msgid "Added"
+msgstr "Додано"
+
+msgid "Stock"
+msgstr "В наявності"
+
+msgid "available"
+msgstr "доступно"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "Add to Cart"
+msgstr "Додати в кошик"
+
+msgid "Login to Purchase"
+msgstr "Увійдіть, щоб купити"
+
+msgid "Price"
+msgstr "Ціна"
+
+msgid "Quantity"
+msgstr "Кількість"
+
+msgid "Total"
+msgstr "Всього"
+
+msgid "Remove"
+msgstr "Видалити"
+
+msgid "Your cart is empty"
+msgstr "Ваш кошик порожній"
+
+msgid "Continue Shopping"
+msgstr "Продовжити покупки"
+
+msgid "Proceed to Checkout"
+msgstr "Перейти до оформлення"
+
+# Comments
+msgid "Comments"
+msgstr "Коментарі"
+
+msgid "Post Comment"
+msgstr "Додати коментар"
+
+msgid "Login to post a comment"
+msgstr "Увійдіть, щоб написати коментар"
+
+msgid "No comments yet. Be the first to comment!"
+msgstr "Поки немає коментарів. Будьте першим!"
+
+msgid "Your comment"
+msgstr "Ваш коментар"
+
+msgid "Submit"
+msgstr "Відправити"
+
+# Checkout & Orders
+msgid "Checkout"
+msgstr "Оформлення замовлення"
+
+msgid "Complete your order"
+msgstr "Завершіть ваше замовлення"
+
+msgid "Shipping Information"
+msgstr "Інформація про доставку"
+
+msgid "Shipping Address"
+msgstr "Адреса доставки"
+
+msgid "Order Summary"
+msgstr "Деталі замовлення"
+
+msgid "Place Order"
+msgstr "Оформити замовлення"
+
+msgid "Order Confirmation"
+msgstr "Підтвердження замовлення"
+
+msgid "Thank you for your order!"
+msgstr "Дякуємо за ваше замовлення!"
+
+msgid "Your order has been placed successfully."
+msgstr "Ваше замовлення було успішно розміщено."
+
+msgid "Order ID"
+msgstr "Номер замовлення"
+
+msgid "Order Date"
+msgstr "Дата замовлення"
+
+msgid "Order Status"
+msgstr "Статус замовлення"
+
+msgid "Order Total"
+msgstr "Загальна сума"
+
+msgid "Order Items"
+msgstr "Товари в замовленні"
+
+# User profile
+msgid "My Profile"
+msgstr "Мій профіль"
+
+msgid "Manage your account details"
+msgstr "Керуйте даними вашого облікового запису"
+
+msgid "Account Information"
+msgstr "Інформація про обліковий запис"
+
+msgid "Member since"
+msgstr "Учасник з"
+
+msgid "Email"
+msgstr "Ел. пошта"
+
+msgid "Full Name"
+msgstr "Повне ім'я"
+
+msgid "Phone"
+msgstr "Телефон"
+
+msgid "Address"
+msgstr "Адреса"
+
+msgid "Bio"
+msgstr "Про себе"
+
+msgid "Edit Profile"
+msgstr "Редагувати профіль"
+
+msgid "Update Profile"
+msgstr "Оновити профіль"
+
+msgid "Order History"
+msgstr "Історія замовлень"
+
+msgid "You haven't placed any orders yet."
+msgstr "Ви ще не робили замовлень."
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "View Details"
+msgstr "Переглянути деталі"
+
+# Authentication
+msgid "Username"
+msgstr "Ім'я користувача"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Confirm Password"
+msgstr "Підтвердіть пароль"
+
+msgid "Create an Account"
+msgstr "Створити обліковий запис"
+
+msgid "Already have an account?"
+msgstr "Вже маєте обліковий запис?"
+
+msgid "Login here"
+msgstr "Увійти тут"
+
+msgid "Don't have an account?"
+msgstr "Не маєте облікового запису?"
+
+msgid "Register now"
+msgstr "Зареєструватися зараз"
+
+msgid "Logged Out"
+msgstr "Вихід виконано"
+
+msgid "You have been successfully logged out"
+msgstr "Ви успішно вийшли з системи"
+
+msgid "Thank you for visiting Scorpy Tale. We hope to see you again soon!"
+msgstr "Дякуємо за відвідування Scorpy Tale. Сподіваємося побачити вас знову найближчим часом!"
+
+msgid "Log In Again"
+msgstr "Увійти знову"
+
+msgid "Return to Home"
+msgstr "Повернутися на головну"
+
+# Order statuses
+msgid "pending"
+msgstr "в очікуванні"
+
+msgid "processing"
+msgstr "обробляється"
+
+msgid "shipped"
+msgstr "відправлено"
+
+msgid "delivered"
+msgstr "доставлено"
+
+msgid "cancelled"
+msgstr "скасовано"
+
+# Footer
+msgid "Your source for beautiful flowers."
+msgstr "Ваше джерело красивих квітів."
+
+msgid "Contact Us"
+msgstr "Зв'яжіться з нами"
+
+msgid "Follow Us"
+msgstr "Слідкуйте за нами"
+
+msgid "All rights reserved."
+msgstr "Всі права захищені."
+
+# About page
+msgid "About Us"
+msgstr "Про нас"
+
+msgid "Our Story"
+msgstr "Наша історія"
+
+msgid "Meet the Team"
+msgstr "Наша команда"
+
+msgid "Our Mission"
+msgstr "Наша місія"
+
+# Contact page
+msgid "Contact Us"
+msgstr "Зв'яжіться з нами"
+
+msgid "Get in Touch"
+msgstr "Зв'язатися з нами"
+
+msgid "Send Message"
+msgstr "Надіслати повідомлення"
+
+msgid "Name"
+msgstr "Ім'я"
+
+msgid "Subject"
+msgstr "Тема"
+
+msgid "Message"
+msgstr "Повідомлення"
+
+msgid "Our Location"
+msgstr "Наше місце розташування"
+
+msgid "Working Hours"
+msgstr "Часи роботи"
+
+msgid "Monday - Friday"
+msgstr "Понеділок - П'ятниця"
+
+msgid "Saturday"
+msgstr "Субота"
+
+msgid "Sunday"
+msgstr "Неділя"
+
+msgid "Closed"
+msgstr "Закрито"
+
+# Additional translations
+msgid "This description is in Ukrainian."
+msgstr "Цей опис українською мовою."
+
+msgid "Ukrainian"
+msgstr "Українська"
+
+msgid "English"
+msgstr "Англійська"
+
+# Common words & phrases
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Delete"
+msgstr "Видалити"
+
+msgid "Edit"
+msgstr "Редагувати"
+
+msgid "Yes"
+msgstr "Так"
+
+msgid "No"
+msgstr "Ні"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Next"
+msgstr "Далі"
+
+msgid "Previous"
+msgstr "Попередній" 

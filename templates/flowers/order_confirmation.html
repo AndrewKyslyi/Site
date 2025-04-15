@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load flower_tags %}
+
+{% block title %}Підтвердження замовлення{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <div class="alert alert-success">
+                Ваше замовлення успішно оформлено!
+            </div>
+            <div class="mb-4">
+                <i class="fas fa-check-circle text-success fa-5x"></i>
+            </div>
+            <h1 class="mb-3">Замовлення підтверджено!</h1>
+            <p class="lead text-muted">Дякуємо за покупку. Ваше замовлення успішно оформлено.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Order Details -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Замовлення #{{ order.id }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <p class="mb-1"><strong>Дата замовлення:</strong></p>
+                            <p>{{ order.order_date|date:"j F Y, H:i" }}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <p class="mb-1"><strong>Адреса доставки:</strong></p>
+                            <p>{{ order.shipping_address }}</p>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h6 class="mb-3">Замовлені товари</h6>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Товар</th>
+                                    <th class="text-center">Кількість</th>
+                                    <th class="text-end">Ціна</th>
+                                    <th class="text-end">Підсумок</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order_items %}
+                                <tr>
+                                    <td>{{ item.flower.name }}</td>
+                                    <td class="text-center">{{ item.quantity }}</td>
+                                    <td class="text-end">₴{{ item.price }}</td>
+                                    <td class="text-end">₴{{ item.price|multiply:item.quantity }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Загалом:</strong></td>
+                                    <td class="text-end"><strong>₴{{ order.total_price }}</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Next Steps -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Що далі?</h5>
+                </div>
+                <div class="card-body">
+                    <p>Ваше замовлення обробляється. Незабаром ви отримаєте підтвердження електронною поштою.</p>
+                    <ul>
+                        <li>Обробка замовлення зазвичай займає 1-2 робочих дні.</li>
+                        <li>Доставка зазвичай займає 3-5 робочих днів.</li>
+                        <li>Ви отримаєте оновлення про статус замовлення електронною поштою.</li>
+                    </ul>
+                    <p>Якщо у вас виникли запитання щодо замовлення, будь ласка, зв'яжіться з нашою службою підтримки.</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="{% url 'home' %}" class="btn btn-primary">Продовжити покупки</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

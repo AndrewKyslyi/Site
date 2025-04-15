@@ -1,0 +1,671 @@
+/* Main Styles for Scorpy Tale */
+
+:root {
+    /* Light Theme (Default) */
+    --primary-color: #6a3093;
+    --secondary-color: #a044ff;
+    --accent-color: #e7b3ff;
+    --text-color: #333;
+    --text-muted: #6c757d;
+    --bg-color: #ffffff;
+    --card-bg: #ffffff;
+    --card-border: none;
+    --nav-bg: linear-gradient(to right, #6a3093, #a044ff);
+    --footer-bg: linear-gradient(to right, #6a3093, #a044ff);
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --border-color: #dee2e6;
+    --input-bg: #ffffff;
+    --input-border: #ced4da;
+    --input-text: #333;
+    --input-placeholder: #6c757d;
+    --jumbotron-bg: #f8f9fa;
+    --alert-bg: #cff4fc;
+    --alert-border: #b6effb;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme */
+    --primary-color: #9c5bd4;
+    --secondary-color: #c48dff;
+    --accent-color: #7941a0;
+    --text-color: #f8f9fa;
+    --text-muted: #adb5bd;
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --card-border: 1px solid #2c2c2c;
+    --nav-bg: linear-gradient(to right, #2d1341, #44237c);
+    --footer-bg: linear-gradient(to right, #2d1341, #44237c);
+    --light-color: #343a40;
+    --dark-color: #f8f9fa;
+    --border-color: #444;
+    --input-bg: #2d2d2d;
+    --input-border: #444;
+    --input-text: #e0e0e0;
+    --input-placeholder: #adb5bd;
+    --jumbotron-bg: #1e1e1e;
+    --alert-bg: #1e3c42;
+    --alert-border: #164450;
+}
+
+/* Apply theme colors to HTML and body */
+html, body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make footer stick to bottom */
+main {
+    flex: 1 0 auto;
+}
+
+/* Navbar */
+.navbar {
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: background 0.3s ease;
+    position: relative;
+}
+
+.navbar-dark {
+    background: var(--nav-bg) !important;
+}
+
+/* Make navbar text white in light theme */
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-brand,
+.navbar-dark .nav-item,
+.navbar-dark .nav-link,
+.navbar-dark .navbar-text {
+    color: white !important;
+}
+
+/* Theme label in navbar should be white */
+.navbar-dark .theme-label {
+    color: white !important;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Light theme specific styles */
+html:not([data-theme="dark"]) {
+    --site-indicator: 'Light Mode';
+}
+
+html:not([data-theme="dark"]) .navbar::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+}
+
+/* Dark theme specific styles */
+html[data-theme="dark"] {
+    --site-indicator: 'Dark Mode';
+}
+
+html[data-theme="dark"] .navbar::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+}
+
+/* Visual theme indicator */
+#theme-toggle::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    border: 2px solid var(--bg-color);
+}
+
+/* Theme toggle */
+.theme-toggle {
+    cursor: pointer;
+    margin-right: 15px;
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Light theme toggle appearance */
+html:not([data-theme="dark"]) .theme-toggle {
+    background-color: var(--secondary-color);
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme toggle appearance */
+html[data-theme="dark"] .theme-toggle {
+    background-color: #ffb84d;
+    color: #121212;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Cards */
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 10px;
+    overflow: hidden;
+    border: var(--card-border);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+.card-header, .card-footer {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Jumbotron */
+.jumbotron, .bg-light {
+    background-color: var(--jumbotron-bg) !important;
+    color: var(--text-color);
+}
+
+/* Forms */
+.form-control {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--input-text);
+}
+
+.form-control:focus {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(160, 68, 255, 0.25);
+}
+
+/* Add styling for placeholders */
+.form-control::placeholder {
+    color: var(--input-placeholder);
+    opacity: 0.8;
+}
+
+label {
+    color: var(--text-color);
+}
+
+.input-group-text {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-color);
+}
+
+/* Additional text color classes */
+.text-dark {
+    color: var(--text-color) !important;
+}
+
+/* Force text colors for various elements */
+input, textarea, select, option {
+    color: var(--input-text) !important;
+}
+
+/* Text colors */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Footer */
+footer {
+    background: var(--footer-bg) !important;
+    color: white;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+    display: inline-block;
+}
+
+.social-links a:hover {
+    transform: scale(1.2);
+}
+
+/* Product details */
+.product-image {
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.price-tag {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Cart and checkout */
+.cart-item {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+}
+
+/* Comments */
+.comment-card {
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Tables */
+.table {
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* Alerts */
+.alert-info {
+    background-color: var(--alert-bg);
+    color: var(--text-color);
+    border-color: var(--alert-border);
+}
+
+/* Bootstrap overrides */
+.bg-dark {
+    background-color: var(--dark-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 180px;
+    }
+    
+    .jumbotron {
+        padding: 2rem;
+    }
+}
+
+/* Contact page specific styles */
+.lead {
+    color: var(--text-color) !important;
+}
+
+.card .h4, .card .h5, .card .h6 {
+    color: var(--text-color);
+}
+
+.card p {
+    color: var(--text-color);
+}
+
+/* Fix contact info card in dark mode */
+[data-theme="dark"] .card-body h5, 
+[data-theme="dark"] .card-body h6, 
+[data-theme="dark"] .card-body p,
+[data-theme="dark"] .card-body label {
+    color: var(--text-color) !important;
+}
+
+/* Make sure jumbotron text is visible */
+.jumbotron h1, .jumbotron h2, .jumbotron h3, .jumbotron p {
+    color: var(--text-color);
+}
+
+/* Add styles for form labels and text elements to ensure visibility */
+.form-label, .form-text {
+    color: var(--text-color);
+}
+
+/* Enhance button contrast in dark mode */
+[data-theme="dark"] .btn-outline-primary {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+[data-theme="dark"] .btn-outline-primary:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+/* Ensure all headings are visible */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: var(--text-color);
+}
+
+/* Fix background of light elements in dark mode */
+[data-theme="dark"] .bg-light {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color);
+}
+
+/* Make sure links are visible */
+a:not(.btn) {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] a:not(.btn) {
+    color: var(--secondary-color);
+}
+
+/* Fix bg-primary cards in dark mode */
+[data-theme="dark"] .card-header.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+/* Fix text-success in dark mode */
+[data-theme="dark"] .text-success {
+    color: #28a745 !important;
+}
+
+/* Fix btn-outline-secondary in dark mode */
+[data-theme="dark"] .btn-outline-secondary {
+    color: var(--text-color);
+    border-color: var(--text-muted);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+    background-color: var(--card-bg);
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Fix for logout page specific styling */
+.fa-check-circle {
+    filter: drop-shadow(0 0 3px rgba(0,0,0,0.2));
+}
+
+/* Fix for minimal content pages like logout */
+.container .row .card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Make sure all container content is visible */
+[data-theme="dark"] .container {
+    color: var(--text-color);
+}
+
+/* Ensure card content is always visible */
+[data-theme="dark"] .card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Ensure text is always visible regardless of theme switching */
+body, p, h1, h2, h3, h4, h5, h6, .text-muted, .lead {
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Force apply text colors after theme switch */
+body[data-theme="light"] {
+    color: var(--text-color) !important;
+}
+
+body[data-theme="dark"] {
+    color: var(--text-color) !important;
+}
+
+/* Additional fix for jumbotron/welcome section text */
+.jumbotron, .container .row > div {
+    color: var(--text-color) !important;
+}
+
+/* Force refresh text on theme change */
+html[data-theme], body[data-theme] {
+    color-scheme: light dark;
+}
+
+/* Additional fixes for any remaining elements */
+.card-title, .card-text, .card-body, .card-footer {
+    color: var(--text-color) !important;
+}
+
+/* Site header with enhanced visibility */
+.site-header {
+    position: relative;
+    z-index: 1000;
+}
+
+/* Theme toggle wrapper */
+.theme-toggle-wrapper {
+    display: none;
+}
+
+/* Theme label */
+.theme-label {
+    display: none;
+}
+
+/* Set label text based on current theme */
+html[data-theme="dark"] .theme-label::before {
+    content: "";
+    display: none;
+}
+
+html:not([data-theme="dark"]) .theme-label::before {
+    content: "";
+    display: none;
+}
+
+/* Theme change animation */
+@keyframes theme-change-flash {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.theme-changed {
+    animation: theme-change-flash 0.5s ease;
+}
+
+/* Highlight the current theme */
+body[data-theme="dark"] {
+    color: var(--text-color) !important;
+    --theme-status: "Dark Theme Enabled";
+}
+
+body[data-theme="light"] {
+    color: var(--text-color) !important;
+    --theme-status: "Light Theme Enabled";
+}
+
+/* Profile icon button */
+.profile-icon {
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    color: white;
+    overflow: hidden;
+}
+
+.profile-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.profile-avatar i {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .profile-avatar {
+    background-color: var(--accent-color);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .profile-avatar i {
+    color: white;
+}
+
+/* Flower description styles */
+.flower-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--text-color) !important;
+    margin-bottom: 1.5rem;
+    /* Enable proper word-breaking for non-English text */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Non-English font support */
+[lang="uk"] .flower-description {
+    font-family: 'Arial Unicode MS', 'Segoe UI', Arial, sans-serif;
+}
+
+/* Ensure text contrast in dark mode for alerts */
+[data-theme="dark"] .alert-info {
+    background-color: #1e3a49;
+    color: #e0f7ff;
+    border-color: #2a617e;
+}
+
+/* Ensure badge text is always visible */
+.badge.bg-info {
+    color: #fff !important;
+    background-color: #0dcaf0 !important;
+}
+
+[data-theme="dark"] .badge.bg-info {
+    color: #000 !important;
+    background-color: #6edff6 !important;
+}
+
+/* Product details section styles */
+.list-group-item.bg-transparent {
+    background-color: transparent;
+    border-color: var(--border-color);
+    color: var(--text-color);
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+[data-theme="dark"] .list-group-item.bg-transparent {
+    border-color: #444;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Make stock available more visible */
+[data-theme="dark"] .list-group-item:has(i.fa-box),
+[data-theme="dark"] .badge.bg-secondary {
+    color: white !important;
+    border-left: 3px solid var(--secondary-color);
+}
+
+/* Fix styling for stock badge in detail pages */
+.stock-badge {
+    background-color: var(--secondary-color) !important;
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .stock-badge {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+/* Language Switcher */
+.language-form {
+    margin: 0;
+    padding: 0;
+}
+
+.language-form button {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+}
+
+.language-form button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+} 

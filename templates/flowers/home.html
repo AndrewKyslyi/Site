@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Головна{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="jumbotron bg-light p-5 rounded-3 mb-4">
+        <h1 class="display-4">Ласкаво просимо до Scorpy Tale</h1>
+        <p class="lead">Ваше ідеальне місце для квітів та унікальних ручних виробів.</p>
+        <hr class="my-4">
+        <p>Ознайомтеся з нашою колекцією свіжих квітів та ручних виробів для будь-якої нагоди. Від весіль до ювілеїв, днів народження до особливих подарунків, у нас є ідеальні товари для вас.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'flower-list' %}" role="button">Купити зараз</a>
+    </div>
+
+    <!-- Featured Products -->
+    <div class="mb-5">
+        <h2 class="text-center mb-4">Рекомендовані товари</h2>
+        <div class="row">
+            {% for flower in featured_flowers %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if flower.image %}
+                    <img src="{{ flower.image.url }}" class="card-img-top" alt="{{ flower.name }}">
+                    {% else %}
+                    <img src="{% static 'images/default_flower.jpg' %}" class="card-img-top" alt="Товар за замовчуванням">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ flower.name }}</h5>
+                        <p class="card-text">{{ flower.description|truncatechars:100 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">₴{{ flower.price }}</span>
+                            <a href="{% url 'flower-detail' flower.id %}" class="btn btn-outline-primary">Деталі</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">Наразі товари недоступні. Будь ласка, перевірте пізніше.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="mb-5">
+        <h2 class="text-center mb-4">Переглянути за категоріями</h2>
+        <div class="row">
+            {% for category in categories %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                        <p class="card-text">{{ category.description|default:"Чудові товари в цій категорії" }}</p>
+                        <a href="{% url 'category-flowers' category.id %}" class="btn btn-primary">Переглянути</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">Наразі категорії недоступні. Будь ласка, перевірте пізніше.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="p-5 bg-light rounded-3 mb-4">
+        <h2 class="text-center mb-4">Чому обирають Scorpy Tale?</h2>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="mb-4">
+                    <i class="fas fa-leaf fa-3x text-success mb-3"></i>
+                    <h5>Якісні товари</h5>
+                    <p>Ми ретельно відбираємо квіти та матеріали для наших виробів, щоб забезпечити найвищу якість.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-4">
+                    <i class="fas fa-truck fa-3x text-primary mb-3"></i>
+                    <h5>Швидка доставка</h5>
+                    <p>Доставка в той же день доступна для замовлень, зроблених до полудня.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-4">
+                    <i class="fas fa-hand-holding-heart fa-3x text-danger mb-3"></i>
+                    <h5>Унікальні вироби</h5>
+                    <p>Наші досвідчені майстри створюють вражаючі композиції та вироби для будь-якої нагоди.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}{{ flower.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- Flower Image -->
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                {% if flower.image %}
+                <img src="{{ flower.image.url }}" class="card-img-top product-image" alt="{{ flower.name }}">
+                {% else %}
+                <img src="{% static 'images/default_flower.jpg' %}" class="card-img-top product-image" alt="Товар за замовчуванням">
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Flower Details -->
+        <div class="col-md-6">
+            <h1 class="mb-3">{{ flower.name }}</h1>
+            <div class="mb-3">
+                <span class="badge bg-primary">{{ flower.category.name }}</span>
+                <span class="badge bg-secondary">{{ flower.stock }} доступно</span>
+            </div>
+            
+            <p class="mb-4 flower-description">
+                {{ flower.description }}
+            </p>
+            <p class="price-tag mb-4">₴{{ flower.price }}</p>
+            
+            <!-- Add to Cart -->
+            {% if user.is_authenticated %}
+            <form method="GET" action="{% url 'add-to-cart' flower.id %}">
+                <button type="submit" class="btn btn-primary btn-lg mb-3" {% if flower.stock < 1 %}disabled{% endif %}>
+                    <i class="fas fa-cart-plus me-2"></i>Додати до кошика
+                </button>
+            </form>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg mb-3">
+                <i class="fas fa-sign-in-alt me-2"></i>Увійдіть для покупки
+            </a>
+            {% endif %}
+            
+            <div class="mt-4">
+                <h5 class="mb-3">Деталі:</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-transparent">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-tag me-3 text-primary"></i>
+                            <span><strong>Категорія:</strong> {{ flower.category.name }}</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-calendar-alt me-3 text-primary"></i>
+                            <span><strong>Додано:</strong> {{ flower.date_added|date:"j F Y" }}</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-box me-3 text-primary"></i>
+                            <span><strong>Наявність:</strong> <span class="stock-badge">{{ flower.stock }} доступно</span></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Admin Actions -->
+            {% if user.is_superuser %}
+            <div class="mt-4">
+                <a href="/admin/flowers/flower/{{ flower.id }}/change/" class="btn btn-info me-2">
+                    <i class="fas fa-edit me-1"></i>Редагувати
+                </a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    <i class="fas fa-trash me-1"></i>Видалити
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Comments Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Коментарі</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Comment Form -->
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'comments' %}">
+                        {% csrf_token %}
+                        {{ comment_form|crispy }}
+                        <button type="submit" class="btn btn-primary mt-3">Додати коментар</button>
+                    </form>
+                    <hr>
+                    {% else %}
+                    <div class="alert alert-info">
+                        <a href="{% url 'login' %}">Увійдіть</a> щоб залишити коментар.
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Comments List -->
+                    {% if comments %}
+                    <div class="comments-list">
+                        {% for comment in comments %}
+                        <div class="card comment-card p-3 mb-3">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <div class="user-image me-3">
+                                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            {{ comment.user.username|first|upper }}
+                                        </div>
+                                    </div>
+                                    <div class="user-content">
+                                        <h6 class="mb-1">{{ comment.user.username }}</h6>
+                                        <p class="text-muted small">{{ comment.date_posted|date:"j F Y, H:i" }}</p>
+                                        <p class="mb-0">{{ comment.content }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p class="text-muted text-center">Поки що немає коментарів. Будьте першим, хто прокоментує!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+{% if user.is_superuser %}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Підтвердження видалення</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Ви впевнені, що хочете видалити "{{ flower.name }}"? Ця дія не може бути скасована.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+        <form method="POST" action="{% url 'flower-delete' flower.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{% url 'flower-list' %}">
+          <button type="submit" class="btn btn-danger">Видалити</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %} 
